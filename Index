@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The SNS Company — Events. Energy. Excellence.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --pink: #FF3CAC;
+    --orange: #FF8C00;
+    --dark: #0E1A22;
+    --darker: #070F14;
+    --mid: #142230;
+    --light: #F6F1EC;
+    --white: #FFFFFF;
+    --grad: linear-gradient(135deg, #FF3CAC, #FF6B35, #FF8C00);
+    --grad-h: linear-gradient(90deg, #FF3CAC, #FF8C00);
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.75);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--darker);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--darker); }
+  ::-webkit-scrollbar-thumb { background: var(--grad-h); border-radius: 2px; }
+
+  /* ─── GRADIENT TEXT ─── */
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── LOGO MARK SVG ─── */
+  .logo-svg { width: 44px; height: 44px; flex-shrink: 0; }
+  .logo-wordmark { display: flex; flex-direction: column; line-height: 1; }
+  .logo-the { font-size: 9px; letter-spacing: 5px; color: var(--text-muted); font-weight: 500; }
+  .logo-sns { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--white); line-height: 1; }
+  .logo-company { font-size: 7px; letter-spacing: 4px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6%; height: 76px;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(7,15,20,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,60,172,0.15);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none; font-size: 14px;
+    font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1.5px; background: var(--grad-h); transform: scaleX(0);
+    transition: transform 0.3s ease; transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--grad); color: var(--white); border: none;
+    padding: 10px 24px; border-radius: 30px; font-size: 14px;
+    font-weight: 600; cursor: pointer; letter-spacing: 0.5px;
+    transition: opacity 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden; padding: 0 6%;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(255,60,172,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 80% at 20% 80%, rgba(255,140,0,0.08) 0%, transparent 60%),
+                var(--darker);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 750px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,60,172,0.1); border: 1px solid rgba(255,60,172,0.3);
+    padding: 6px 16px; border-radius: 30px; margin-bottom: 28px;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink);
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+  .hero-h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 9vw, 130px);
+    line-height: 0.92; letter-spacing: 2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-h1 em { font-style: normal; display: block; }
+  .hero-sub {
+    font-size: clamp(15px, 1.8vw, 18px); color: var(--text-dim);
+    max-width: 520px; line-height: 1.7; margin-bottom: 44px;
+    font-weight: 300; animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.8s 0.45s ease both; }
+  .btn-primary {
+    background: var(--grad); color: var(--white);
+    padding: 14px 34px; border-radius: 40px; font-size: 15px;
+    font-weight: 600; text-decoration: none; letter-spacing: 0.5px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 4px 30px rgba(255,60,172,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(255,60,172,0.45); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 14px 34px; border-radius: 40px; font-size: 15px;
+    font-weight: 600; text-decoration: none; letter-spacing: 0.5px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--pink); background: rgba(255,60,172,0.08); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px;
+    padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08);
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 42px;
+    background: var(--grad); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
+  }
+  .hero-stat-label { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; margin-top: 4px; }
+  .hero-visual {
+    position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+    z-index: 1; animation: floatAnim 6s ease-in-out infinite;
+  }
+  @keyframes floatAnim { 0%,100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-52%) translateX(-8px); } }
+  .hero-big-logo { opacity: 0.07; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 6%; }
+  .section-tag {
+    display: inline-block; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--pink); font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1; letter-spacing: 1px; margin-bottom: 20px;
+  }
+  .section-sub {
+    font-size: 16px; color: var(--text-dim); max-width: 540px;
+    line-height: 1.75; font-weight: 300;
+  }
+
+  /* ─── TICKER ─── */
+  .ticker-wrap {
+    background: var(--grad); padding: 14px 0; overflow: hidden;
+    white-space: nowrap; position: relative;
+  }
+  .ticker-inner { display: inline-flex; animation: ticker 22s linear infinite; }
+  .ticker-item {
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+    letter-spacing: 3px; color: rgba(0,0,0,0.6); padding: 0 36px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .ticker-item::before { content: '⚡'; font-size: 14px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .about-visual {
+    position: relative; display: flex; justify-content: center;
+  }
+  .about-card-main {
+    background: var(--mid); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
+  }
+  .about-card-main::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--grad);
+  }
+  .about-quote {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: clamp(20px, 2.5vw, 28px); line-height: 1.45;
+    color: var(--white); margin-bottom: 24px;
+  }
+  .about-quote span { color: var(--pink); }
+  .about-author { display: flex; align-items: center; gap: 12px; }
+  .about-author-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--grad); display: flex; align-items: center;
+    justify-content: center; font-family: 'Bebas Neue'; font-size: 20px;
+  }
+  .about-author-name { font-weight: 600; font-size: 14px; }
+  .about-author-role { font-size: 12px; color: var(--text-muted); }
+  .about-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .chip {
+    background: rgba(255,60,172,0.1); border: 1px solid rgba(255,60,172,0.25);
+    color: var(--pink); padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .about-text p { font-size: 16px; color: var(--text-dim); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+  .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .pillar {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 20px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .pillar:hover { border-color: rgba(255,60,172,0.4); background: rgba(255,60,172,0.05); }
+  .pillar-icon { font-size: 22px; margin-bottom: 10px; }
+  .pillar-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .pillar-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--darker); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .service-card {
+    background: var(--mid); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 36px 30px; position: relative;
+    overflow: hidden; transition: transform 0.35s, border-color 0.35s;
+    cursor: default;
+  }
+  .service-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--grad); opacity: 0;
+    transition: opacity 0.35s; z-index: 0;
+  }
+  .service-card:hover { transform: translateY(-6px); border-color: rgba(255,60,172,0.4); }
+  .service-card:hover::after { opacity: 0.05; }
+  .service-card > * { position: relative; z-index: 1; }
+  .service-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    background: var(--grad); display: flex; align-items: center;
+    justify-content: center; font-size: 24px; margin-bottom: 22px;
+  }
+  .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; margin-bottom: 12px; }
+  .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .service-tag {
+    font-size: 11px; padding: 4px 10px; border-radius: 12px;
+    background: rgba(255,255,255,0.06); color: var(--text-dim); letter-spacing: 0.5px;
+  }
+  .service-card.featured { background: linear-gradient(160deg, #1a0e22, #220e18); border-color: rgba(255,60,172,0.3); }
+  .featured-badge {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--grad); color: var(--white);
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ─── PROCESS ─── */
+  #process { background: var(--dark); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 70px; position: relative; }
+  .process-steps::before {
+    content: ''; position: absolute; top: 34px; left: 12.5%; right: 12.5%;
+    height: 1px; background: linear-gradient(90deg, transparent, rgba(255,60,172,0.4), transparent);
+  }
+  .process-step { text-align: center; padding: 0 20px; }
+  .step-num {
+    width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 24px;
+    background: var(--grad); display: flex; align-items: center;
+    justify-content: center; font-family: 'Bebas Neue'; font-size: 28px;
+    box-shadow: 0 0 30px rgba(255,60,172,0.3);
+  }
+  .step-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ─── NUMBERS ─── */
+  #numbers {
+    background: var(--grad); padding: 80px 6%;
+    position: relative; overflow: hidden;
+  }
+  #numbers::before {
+    content: 'SNS'; position: absolute; right: -2%;
+    top: 50%; transform: translateY(-50%);
+    font-family: 'Bebas Neue'; font-size: 260px; letter-spacing: -10px;
+    color: rgba(0,0,0,0.15); line-height: 1; pointer-events: none;
+  }
+  .numbers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; position: relative; z-index: 1; }
+  .number-item { text-align: center; }
+  .number-big { font-family: 'Bebas Neue', sans-serif; font-size: clamp(54px, 6vw, 82px); line-height: 1; color: rgba(0,0,0,0.7); }
+  .number-label { font-size: 13px; font-weight: 600; color: rgba(0,0,0,0.55); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+  /* ─── GALLERY / EVENTS ─── */
+  #gallery { background: var(--darker); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 200px; gap: 16px; margin-top: 50px; }
+  .gallery-item {
+    border-radius: 16px; position: relative; overflow: hidden;
+    cursor: pointer; transition: transform 0.3s;
+  }
+  .gallery-item:hover { transform: scale(0.98); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-overlay {
+    position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 20px; opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-overlay-title { font-weight: 700; font-size: 16px; }
+  .gallery-overlay-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .g1 { background: linear-gradient(135deg, #1a0e2e, #2d1245); }
+  .g2 { background: linear-gradient(135deg, #0e1e2e, #0e2d45); }
+  .g3 { background: linear-gradient(135deg, #2e1a0e, #452d0e); }
+  .g4 { background: linear-gradient(135deg, #0e2e1a, #0e452d); }
+  .g5 { background: linear-gradient(135deg, #2e0e1a, #451230); }
+  .g6 { background: linear-gradient(135deg, #1a2e0e, #2d4512); }
+  .gallery-icon { font-size: 48px; opacity: 0.35; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--dark); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testi-card {
+    background: var(--mid); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 32px; transition: border-color 0.3s;
+  }
+  .testi-card:hover { border-color: rgba(255,60,172,0.3); }
+  .testi-stars { color: var(--orange); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+  .testi-text { font-size: 15px; color: var(--text-dim); line-height: 1.75; font-style: italic; margin-bottom: 24px; font-weight: 300; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue'; font-size: 18px; flex-shrink: 0;
+  }
+  .testi-name { font-weight: 600; font-size: 14px; }
+  .testi-role { font-size: 12px; color: var(--text-muted); }
+
+  /* ─── CLIENTS ─── */
+  #clients { background: var(--darker); padding: 70px 6%; }
+  .clients-label { text-align: center; font-size: 12px; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 48px; }
+  .clients-row { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 48px 64px; }
+  .client-logo {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.18); transition: color 0.3s; cursor: default;
+  }
+  .client-logo:hover { color: rgba(255,255,255,0.55); }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; align-items: start; }
+  .contact-info { }
+  .contact-info p { font-size: 16px; color: var(--text-dim); line-height: 1.8; font-weight: 300; margin-bottom: 36px; }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item { display: flex; align-items: center; gap: 16px; }
+  .contact-item-icon {
+    width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+    background: rgba(255,60,172,0.1); border: 1px solid rgba(255,60,172,0.25);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .contact-item-label { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+  .contact-item-val { font-size: 15px; font-weight: 500; margin-top: 2px; }
+  .contact-form { background: var(--mid); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; padding: 40px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .form-group label { font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 13px 16px; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 15px;
+    transition: border-color 0.3s, background 0.3s; outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group select, .form-group textarea:focus {
+    border-color: rgba(255,60,172,0.5); background: rgba(255,60,172,0.06);
+  }
+  .form-group select option { background: var(--dark); }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%; padding: 15px; border-radius: 12px;
+    background: var(--grad); color: var(--white); border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700;
+    letter-spacing: 1px; cursor: pointer; transition: opacity 0.3s, transform 0.2s;
+  }
+  .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ─── CTA BANNER ─── */
+  #cta {
+    padding: 100px 6%; background: var(--darker);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cta-box {
+    background: linear-gradient(135deg, rgba(255,60,172,0.15), rgba(255,140,0,0.1));
+    border: 1px solid rgba(255,60,172,0.25);
+    border-radius: 32px; padding: 72px 60px; text-align: center;
+    max-width: 860px; width: 100%; position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,60,172,0.2), transparent 70%);
+  }
+  .cta-box::after {
+    content: ''; position: absolute; bottom: -60px; left: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,140,0,0.15), transparent 70%);
+  }
+  .cta-title { font-family: 'Bebas Neue'; font-size: clamp(44px, 6vw, 80px); line-height: 1; margin-bottom: 16px; position: relative; z-index: 1; }
+  .cta-sub { font-size: 16px; color: var(--text-dim); margin-bottom: 36px; position: relative; z-index: 1; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--darker); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 64px 6% 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin: 16px 0 24px; max-width: 280px; }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; text-decoration: none; transition: background 0.3s, border-color 0.3s;
+  }
+  .social-btn:hover { background: rgba(255,60,172,0.15); border-color: rgba(255,60,172,0.4); }
+  .footer-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a {
+    font-size: 14px; color: var(--text-dim); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--pink); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 28px; display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: gap; gap: 16px;
+  }
+  .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .footer-bottom-links a:hover { color: var(--white); }
+
+  /* ─── MOBILE NAV ─── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(7,15,20,0.97); backdrop-filter: blur(20px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 28px; font-family: 'Bebas Neue'; letter-spacing: 3px; color: var(--white); text-decoration: none; transition: color 0.3s; }
+  .mobile-menu a:hover { color: var(--pink); }
+  .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .process-steps::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 70px 5%; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-h1 { font-size: 64px; }
+    .hero-visual { display: none; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.wide { grid-column: span 1; }
+    .gallery-item.tall { grid-row: span 1; }
+    .about-pillars { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .cta-box { padding: 48px 28px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .process-steps { grid-template-columns: 1fr; }
+    #numbers::before { font-size: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#process" onclick="toggleMenu()">Process</a>
+  <a href="#gallery" onclick="toggleMenu()">Events</a>
+  <a href="#testimonials" onclick="toggleMenu()">Clients</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="logo-wrap">
+    <svg class="logo-svg" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF3CAC"/><stop offset="100%" stop-color="#FF8C00"/>
+        </linearGradient>
+        <clipPath id="cp">
+          <rect x="2" y="4" width="36" height="36" rx="6" transform="rotate(-10 20 22)"/>
+        </clipPath>
+      </defs>
+      <rect x="2" y="4" width="36" height="36" rx="6" fill="url(#lg)" transform="rotate(-10 20 22)"/>
+      <g clip-path="url(#cp)">
+        <polygon points="24,4 12,24 20,24 14,40 34,18 24,18" fill="white" opacity="0.95"/>
+      </g>
+    </svg>
+    <div class="logo-wordmark">
+      <span class="logo-the">THE</span>
+      <span class="logo-sns">SNS</span>
+      <span class="logo-company">COMPANY</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#gallery">Events</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Delhi NCR's Premier Event Partner</div>
+    <h1 class="hero-h1">
+      <em>EVENTS.</em>
+      <em class="grad-text">ENERGY.</em>
+      <em>EXCELLENCE.</em>
+    </h1>
+    <p class="hero-sub">We craft extraordinary corporate experiences — from high-octane sports olympics to impactful conferences. Every detail planned, every moment unforgettable.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-outline">Let's Talk</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">150+</div>
+        <div class="hero-stat-label">Events Delivered</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">80+</div>
+        <div class="hero-stat-label">Corporate Clients</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">12K+</div>
+        <div class="hero-stat-label">Happy Attendees</div>
+      </div>
+    </div>
+  </div>
+  <!-- Big background logo -->
+  <div class="hero-visual">
+    <svg class="hero-big-logo" width="320" height="320" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hlg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF3CAC"/><stop offset="100%" stop-color="#FF8C00"/>
+        </linearGradient>
+        <clipPath id="hcp"><rect x="16" y="16" width="168" height="168" rx="28" transform="rotate(-10 100 100)"/></clipPath>
+      </defs>
+      <rect x="16" y="16" width="168" height="168" rx="28" fill="url(#hlg)" transform="rotate(-10 100 100)"/>
+      <g clip-path="url(#hcp)">
+        <polygon points="114,22 62,108 100,108 72,178 158,86 118,86" fill="white" opacity="0.95"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">Corporate Sports Olympics</span>
+    <span class="ticker-item">Annual Conferences</span>
+    <span class="ticker-item">Team Meetups</span>
+    <span class="ticker-item">Award Ceremonies</span>
+    <span class="ticker-item">Product Launches</span>
+    <span class="ticker-item">Town Halls</span>
+    <span class="ticker-item">Leadership Summits</span>
+    <span class="ticker-item">Corporate Sports Olympics</span>
+    <span class="ticker-item">Annual Conferences</span>
+    <span class="ticker-item">Team Meetups</span>
+    <span class="ticker-item">Award Ceremonies</span>
+    <span class="ticker-item">Product Launches</span>
+    <span class="ticker-item">Town Halls</span>
+    <span class="ticker-item">Leadership Summits</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="section-tag reveal">Who We Are</span>
+  <div class="about-grid">
+    <div class="about-visual reveal reveal-d1">
+      <div class="about-card-main">
+        <p class="about-quote">"We don't just <span>manage events</span> — we engineer moments that your team will be talking about for years."</p>
+        <div class="about-author">
+          <div class="about-author-avatar">S</div>
+          <div>
+            <div class="about-author-name">The SNS Team</div>
+            <div class="about-author-role">Delhi NCR's Event Architects</div>
+          </div>
+        </div>
+        <div class="about-chips">
+          <span class="chip">Delhi NCR</span>
+          <span class="chip">Corporate Events</span>
+          <span class="chip">Sports Olympics</span>
+          <span class="chip">Conferences</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal reveal-d2">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">BUILT FOR<br><span class="grad-text">BIG MOMENTS</span></h2>
+      <p>The SNS Company was born from a simple belief — that corporate events should feel as alive and energetic as the people attending them. We're based in Delhi NCR and we understand the pulse of Indian corporate culture.</p>
+      <p>From large-scale sports olympics that get entire organisations moving, to intimate leadership conferences that spark real conversations — we bring precision, creativity, and relentless attention to detail to everything we do.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🎯</div>
+          <div class="pillar-title">Strategic Planning</div>
+          <div class="pillar-desc">Every event aligned to your goals and culture</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⚡</div>
+          <div class="pillar-title">High Energy Execution</div>
+          <div class="pillar-desc">Flawless delivery from start to finish</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🏆</div>
+          <div class="pillar-title">Award-Worthy Results</div>
+          <div class="pillar-desc">Events that earn standing ovations</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-title">End-to-End Partnership</div>
+          <div class="pillar-desc">We handle everything, you just show up</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-tag reveal">What We Do</span>
+  <h2 class="section-title reveal reveal-d1">OUR <span class="grad-text">SERVICES</span></h2>
+  <p class="section-sub reveal reveal-d2">From adrenaline-pumping sports days to polished corporate summits — we do it all with the same intensity and care.</p>
+  <div class="services-grid">
+    <div class="service-card featured reveal reveal-d1">
+      <span class="featured-badge">FLAGSHIP</span>
+      <div class="service-icon">🏅</div>
+      <div class="service-title">Corporate Sports Olympics</div>
+      <p class="service-desc">Our signature offering — a full-scale sports day with multiple sporting events, team scoring, ceremonies, commentary, and awards. Built to boost morale, teamwork, and company culture.</p>
+      <div class="service-tags">
+        <span class="service-tag">Cricket</span>
+        <span class="service-tag">Football</span>
+        <span class="service-tag">Athletics</span>
+        <span class="service-tag">Indoor Sports</span>
+        <span class="service-tag">Relay Races</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-d2">
+      <div class="service-icon">🎤</div>
+      <div class="service-title">Corporate Conferences</div>
+      <p class="service-desc">Professionally managed conferences with stage design, AV production, speaker coordination, branding and seamless logistics for 50 to 5000 attendees.</p>
+      <div class="service-tags">
+        <span class="service-tag">Annual Meets</span>
+        <span class="service-tag">Leadership Summits</span>
+        <span class="service-tag">Town Halls</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-d3">
+      <div class="service-icon">🤝</div>
+      <div class="service-title">Team Meetups & Retreats</div>
+      <p class="service-desc">Curated team experiences for bonding, brainstorming, and celebrating wins. Off-sites, team dinners, and outbound programmes across Delhi NCR and beyond.</p>
+      <div class="service-tags">
+        <span class="service-tag">Outbound</span>
+        <span class="service-tag">Off-sites</span>
+        <span class="service-tag">Team Dinners</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-d1">
+      <div class="service-icon">🏆</div>
+      <div class="service-title">Award Ceremonies</div>
+      <p class="service-desc">Red-carpet experiences that celebrate your people. Glamorous stage design, trophy coordination, photography, live entertainment and memorable moments.</p>
+      <div class="service-tags">
+        <span class="service-tag">Stage Design</span>
+        <span class="service-tag">Red Carpet</span>
+        <span class="service-tag">Entertainment</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-d2">
+      <div class="service-icon">🚀</div>
+      <div class="service-title">Product Launches</div>
+      <p class="service-desc">Make a statement with a product launch that creates buzz. From intimate press events to large audience unveilings with experiential zones and live demonstrations.</p>
+      <div class="service-tags">
+        <span class="service-tag">Press Launches</span>
+        <span class="service-tag">Experiential</span>
+        <span class="service-tag">B2C & B2B</span>
+      </div>
+    </div>
+    <div class="service-card reveal reveal-d3">
+      <div class="service-icon">🎪</div>
+      <div class="service-title">Full Event Production</div>
+      <p class="service-desc">End-to-end production services — venue sourcing, décor, AV, catering, logistics, photography, live streaming and post-event content. One point of contact, zero stress.</p>
+      <div class="service-tags">
+        <span class="service-tag">AV & Tech</span>
+        <span class="service-tag">Décor</span>
+        <span class="service-tag">Catering</span>
+        <span class="service-tag">Photography</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <span class="section-tag reveal">How We Work</span>
+  <h2 class="section-title reveal reveal-d1">THE SNS <span class="grad-text">PROCESS</span></h2>
+  <p class="section-sub reveal reveal-d2">Four steps from idea to standing ovation.</p>
+  <div class="process-steps">
+    <div class="process-step reveal reveal-d1">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-desc">We understand your goals, team size, budget and vision in a focused 30-minute consultation.</p>
+    </div>
+    <div class="process-step reveal reveal-d2">
+      <div class="step-num">02</div>
+      <div class="step-title">Custom Proposal</div>
+      <p class="step-desc">We design a tailored event blueprint — concept, timeline, vendor matrix and detailed budget.</p>
+    </div>
+    <div class="process-step reveal reveal-d3">
+      <div class="step-num">03</div>
+      <div class="step-title">Full Execution</div>
+      <p class="step-desc">Our on-ground team handles every detail — from setup to showtime to teardown. You relax.</p>
+    </div>
+    <div class="process-step reveal reveal-d4">
+      <div class="step-num">04</div>
+      <div class="step-title">Post-Event Report</div>
+      <p class="step-desc">We share highlights, learnings, photos, and a summary deck — so you can share the success.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="numbers-grid">
+    <div class="number-item reveal">
+      <div class="number-big">150+</div>
+      <div class="number-label">Events Executed</div>
+    </div>
+    <div class="number-item reveal reveal-d1">
+      <div class="number-big">80+</div>
+      <div class="number-label">Corporate Clients</div>
+    </div>
+    <div class="number-item reveal reveal-d2">
+      <div class="number-big">12K+</div>
+      <div class="number-label">Happy Attendees</div>
+    </div>
+    <div class="number-item reveal reveal-d3">
+      <div class="number-big">100%</div>
+      <div class="number-label">Client Retention</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <span class="section-tag reveal">Our Work</span>
+  <h2 class="section-title reveal reveal-d1">EVENTS IN <span class="grad-text">ACTION</span></h2>
+  <p class="section-sub reveal reveal-d2">A glimpse into the moments we've created across Delhi NCR.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item tall reveal reveal-d1">
+      <div class="gallery-bg g1" style="font-size:72px;opacity:0.4">🏅</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">TechCorp Sports Olympics 2024</div>
+        <div class="gallery-overlay-sub">1200 Employees · Noida Stadium</div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-d2">
+      <div class="gallery-bg g2" style="font-size:60px;opacity:0.4">🎤</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">Annual Leadership Summit</div>
+        <div class="gallery-overlay-sub">400 Leaders · Gurugram</div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-d3">
+      <div class="gallery-bg g3" style="font-size:60px;opacity:0.4">🏆</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">Star Performer Awards</div>
+        <div class="gallery-overlay-sub">600 Guests · Delhi</div>
+      </div>
+    </div>
+    <div class="gallery-item wide reveal reveal-d1">
+      <div class="gallery-bg g4" style="font-size:60px;opacity:0.4">🤝</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">Pan-India Team Offsite</div>
+        <div class="gallery-overlay-sub">300 Employees · Jim Corbett</div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-d2">
+      <div class="gallery-bg g5" style="font-size:60px;opacity:0.4">🚀</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-title">Product Launch Event</div>
+        <div class="gallery-overlay-sub">800 Guests · Delhi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <span class="section-tag reveal">What Clients Say</span>
+  <h2 class="section-title reveal reveal-d1">REAL <span class="grad-text">STORIES</span></h2>
+  <div class="testimonials-grid">
+    <div class="testi-card reveal reveal-d1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"SNS Company organised our entire Sports Olympics for 1,200 employees. The energy was electric, the logistics were flawless, and our team still talks about it. Absolutely outstanding work."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#FF3CAC,#FF8C00)">R</div>
+        <div>
+          <div class="testi-name">Radhika Mehra</div>
+          <div class="testi-role">Head of HR, TechCorp India</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"From venue to décor to live commentary — they handled everything. Our annual conference was the most professional event we've hosted. We won't use anyone else."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#00b4d8,#0077b6)">A</div>
+        <div>
+          <div class="testi-name">Amit Srivastava</div>
+          <div class="testi-role">VP Operations, FinServ Group</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d3">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The team offsite they planned for us was exactly what we needed — fun, engaging and well-organised. Every single person on my team came back recharged. That's rare."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#56ab2f,#a8e063)">P</div>
+        <div>
+          <div class="testi-name">Priya Nair</div>
+          <div class="testi-role">Director, GrowthBridge Consulting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <p class="clients-label reveal">Trusted by leading companies across Delhi NCR</p>
+  <div class="clients-row reveal reveal-d1">
+    <span class="client-logo">TECHCORP</span>
+    <span class="client-logo">FINSERV</span>
+    <span class="client-logo">GROWTHBRIDGE</span>
+    <span class="client-logo">NEXATECH</span>
+    <span class="client-logo">URBANEDGE</span>
+    <span class="client-logo">PINNACLE</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-tag reveal">Get In Touch</span>
+  <h2 class="section-title reveal reveal-d1">LET'S CREATE SOMETHING <span class="grad-text">AMAZING</span></h2>
+  <div class="contact-grid">
+    <div class="contact-info reveal reveal-d1">
+      <p>Ready to plan your next corporate event? Tell us your vision and we'll turn it into an unforgettable experience. Based in Gurugram, we serve all of Delhi NCR and beyond.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-val">Gurugram, Haryana — Delhi NCR</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          <div>
+            <div class="contact-item-label">Website</div>
+            <div class="contact-item-val">www.thesnscompany.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val">hello@thesnscompany.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-val">+91 98xxx xxxxx</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-d2">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Rahul Sharma"/>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Acme Corp"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="rahul@company.com"/>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="+91 98765 43210"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <select>
+          <option>Select an event type</option>
+          <option>Corporate Sports Olympics</option>
+          <option>Annual Conference</option>
+          <option>Team Meetup / Offsite</option>
+          <option>Award Ceremony</option>
+          <option>Product Launch</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Team Size</label>
+        <select>
+          <option>Select approximate size</option>
+          <option>Under 50</option>
+          <option>50 – 200</option>
+          <option>200 – 500</option>
+          <option>500 – 1000</option>
+          <option>1000+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your event</label>
+        <textarea placeholder="Share your vision, date, any special requirements..."></textarea>
+      </div>
+      <button class="form-submit">SEND ENQUIRY ⚡</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta">
+  <div class="cta-box reveal">
+    <h2 class="cta-title">READY TO <span class="grad-text">SPARK</span> SOMETHING?</h2>
+    <p class="cta-sub">From 50 to 5,000 — we make every event legendary. Let's talk.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-primary">Plan My Event</a>
+      <a href="https://wa.me/91XXXXXXXXXX" class="btn-outline">💬 WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="logo-wrap" style="margin-bottom:4px">
+        <svg width="36" height="36" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF3CAC"/><stop offset="100%" stop-color="#FF8C00"/>
+            </linearGradient>
+            <clipPath id="fcp"><rect x="2" y="4" width="36" height="36" rx="6" transform="rotate(-10 20 22)"/></clipPath>
+          </defs>
+          <rect x="2" y="4" width="36" height="36" rx="6" fill="url(#flg)" transform="rotate(-10 20 22)"/>
+          <g clip-path="url(#fcp)">
+            <polygon points="24,4 12,24 20,24 14,40 34,18 24,18" fill="white" opacity="0.95"/>
+          </g>
+        </svg>
+        <div class="logo-wordmark">
+          <span class="logo-the">THE</span>
+          <span class="logo-sns">SNS</span>
+          <span class="logo-company">COMPANY</span>
+        </div>
+      </a>
+      <p>Delhi NCR's most energetic event management company. We create corporate experiences that inspire, connect and celebrate.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">tw</a>
+        <a href="#" class="social-btn">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Sports Olympics</a></li>
+        <li><a href="#services">Conferences</a></li>
+        <li><a href="#services">Team Meetups</a></li>
+        <li><a href="#services">Award Ceremonies</a></li>
+        <li><a href="#services">Product Launches</a></li>
+        <li><a href="#services">Full Production</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#gallery">Our Work</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Gurugram, Delhi NCR</a></li>
+        <li><a href="mailto:hello@thesnscompany.com">hello@thesnscompany.com</a></li>
+        <li><a href="#">+91 98xxx xxxxx</a></li>
+        <li><a href="#">thesnscompany.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 The SNS Company. All rights reserved. Built with ⚡ in Delhi NCR.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = '✅ ENQUIRY SENT!';
+    this.style.background = 'linear-gradient(135deg, #00b96b, #00d084)';
+    setTimeout(() => {
+      this.textContent = 'SEND ENQUIRY ⚡';
+      this.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
